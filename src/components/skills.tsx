@@ -1,97 +1,85 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { MagicCard } from "@/components/ui/magic-card";
+import { TiltCard } from "@/components/ui/tilt-card";
 import { Marquee } from "@/components/ui/marquee";
 import { BlurFade } from "@/components/ui/blur-fade";
-import { Cpu, Cloud, Terminal, Shield, Sparkles } from "lucide-react";
+import { Building2, ShieldCheck, ClipboardCheck, TrendingUp, Users, FileCheck, HardHat, Scale } from "lucide-react";
 
-// Skill Categories Data
 const skillGroups = [
   {
-    category: "AWS Cloud Services",
-    icon: Cloud,
+    category: "Mortgage Valuation & Banking Operations",
+    icon: ShieldCheck,
     skills: [
-      { name: "EC2", alt: "Amazon EC2", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" },
-      { name: "S3", alt: "Amazon S3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-line-wordmark.svg" },
-      { name: "VPC", alt: "AWS VPC", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
-      { name: "RDS", alt: "AWS RDS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" },
-      { name: "ALB", alt: "Application Load Balancer", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
-      { name: "Auto Scaling", alt: "AWS Auto Scaling", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-line-wordmark.svg" },
-      { name: "CloudWatch", alt: "Amazon CloudWatch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" },
-      { name: "IAM", alt: "AWS IAM", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
-      { name: "Route 53", alt: "AWS Route 53", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" },
-      { name: "CloudFront", alt: "AWS CloudFront", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-line-wordmark.svg" },
-      { name: "Cognito", alt: "AWS Cognito", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
-      { name: "EBS", alt: "Elastic Block Store", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" },
+      { name: "Property Valuations", desc: "Residential, commercial & land market estimations", icon: Building2 },
+      { name: "Technical Audits", desc: "Sample case reviews & quality compliance audits", icon: ClipboardCheck },
+      { name: "Vendor Management", desc: "Empanelment, TAT monitoring & billing validation", icon: Users },
+      { name: "Risk Assessment", desc: "Macro/micro metrics & risk mitigation modeling", icon: Scale },
+      { name: "Technical Concurrence", desc: "End-to-end case workflow & report approval", icon: FileCheck },
+      { name: "Market Intelligence", desc: "Real estate dynamics, price trends & transaction metrics", icon: TrendingUp },
     ],
   },
   {
-    category: "DevOps & Development Tools",
-    icon: Terminal,
+    category: "Regulatory Compliance & Civil Engineering",
+    icon: HardHat,
     skills: [
-      { name: "Docker", alt: "Docker Containerization", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-      { name: "Kubernetes", alt: "Kubernetes Orchestration", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
-      { name: "Jenkins", alt: "Jenkins CI/CD", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" },
-      { name: "Ansible", alt: "Ansible Automation", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" },
-      { name: "Nginx", alt: "Nginx Web Server", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" },
-      { name: "Node.js", alt: "Node.js Runtime", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-      { name: "Next.js", alt: "Next.js React Framework", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-      { name: "Git / GitHub", alt: "Git Source Control", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
-      { name: "Linux / Ubuntu", alt: "Linux OS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
-      { name: "SSH / CLI", alt: "Bash Terminal CLI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" },
-      { name: "JavaScript", alt: "JavaScript ES6+", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+      { name: "DCR Norms & Master Plans", desc: "Development Control Regulations & land use verification", icon: ShieldCheck },
+      { name: "Document Vetting", desc: "Mortgage legal/technical document validation", icon: FileCheck },
+      { name: "Site Inspection & Survey", desc: "Exterior & interior layout dimension surveying", icon: Building2 },
+      { name: "Commercial Estimation", desc: "Offices, shopping centers & factory valuations", icon: TrendingUp },
+      { name: "Civil Site Supervision", desc: "Labor management, material budgeting & progress safety", icon: HardHat },
+      { name: "Dispute Analysis", desc: "Boundary & valuation dispute research", icon: Scale },
     ],
   },
 ];
 
-const marqueeLogos = [
-  { name: "AWS Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
-  { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-  { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
-  { name: "Jenkins", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" },
-  { name: "Ansible", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" },
-  { name: "Nginx", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" },
-  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-  { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-  { name: "Linux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
-  { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+const companyMarquee = [
+  { name: "IDFC FIRST Bank", desc: "Technical Manager", logo: "/logos/idfc.svg" },
+  { name: "Muthoot Homefin", desc: "Assistant Manager III", logo: "/logos/muthoot.svg" },
+  { name: "ICICI Bank", desc: "Technical Officer", logo: "/logos/icici.svg" },
+  { name: "Adroit Technical", desc: "Technical Engineer", logo: "/logos/adroit.svg" },
+  { name: "Mars Construction", desc: "Site Engineer (ADB)", logo: "/logos/mars.svg" },
+  { name: "Property Valuation", desc: "Land, Building & Commercial", logo: "/logos/idfc.svg" },
+  { name: "Technical Audit", desc: "Quality & SLA Concurrence", logo: "/logos/icici.svg" },
 ];
 
 export function Skills() {
   return (
-    <section id="skills" className="py-20 relative">
+    <section id="skills" className="py-24 relative">
       <div className="container mx-auto px-4 max-w-6xl">
         
         {/* Section Header */}
         <BlurFade delay={0.1}>
           <div className="flex flex-col items-center text-center mb-12">
-            <span className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase bg-cyan-950/60 border border-cyan-500/30 px-3.5 py-1 rounded-full mb-3">
-              TECHNICAL EXPERTISE
+            <span className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase bg-cyan-950/80 border border-cyan-500/30 px-4 py-1.5 rounded-full mb-4 shadow-lg shadow-cyan-500/10">
+              TECHNICAL &amp; CORE SKILLS
             </span>
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Skills, Tools &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">App Ecosystem</span>
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
+              Domain Expertise &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500">Core Competencies</span>
             </h2>
-            <p className="text-slate-400 text-base max-w-2xl mt-4 font-light">
-              Hands-on experience with modern cloud infrastructure, container orchestration, CI/CD automation, and web application stacks.
+            <p className="text-slate-400 text-base sm:text-lg max-w-2xl mt-4 font-light">
+              Deep expertise in technical valuation, banking audit frameworks, vendor SLA enforcement, real estate intelligence, and civil engineering.
             </p>
           </div>
         </BlurFade>
 
-        {/* Magic Marquee Carousel */}
+        {/* Marquee Carousel with Official Logos */}
         <BlurFade delay={0.2} className="mb-16">
           <div className="relative w-full overflow-hidden rounded-2xl glass-panel p-4 border border-cyan-500/20">
-            <Marquee pauseOnHover className="[--duration:30s]">
-              {marqueeLogos.map((logo, idx) => (
+            <Marquee pauseOnHover className="[--duration:28s]">
+              {companyMarquee.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center gap-3 px-6 py-3 rounded-xl bg-slate-900/80 border border-cyan-500/20 shadow-md backdrop-blur-md hover:border-cyan-400 transition-all duration-300"
+                  className="flex items-center gap-3.5 px-6 py-3 rounded-xl bg-slate-900/90 border border-cyan-500/20 shadow-lg backdrop-blur-md hover:border-cyan-400 transition-all duration-300"
                 >
-                  <div className="size-8 relative flex items-center justify-center">
-                    <img src={logo.icon} alt={logo.name} className="size-full object-contain" />
+                  <div className="size-10 relative flex items-center justify-center rounded-lg overflow-hidden bg-white p-1 border border-slate-200 shrink-0">
+                    <Image src={item.logo} alt={item.name} width={36} height={36} className="object-contain size-full" />
                   </div>
-                  <span className="text-sm font-semibold text-white font-mono">{logo.name}</span>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-bold text-white font-mono">{item.name}</span>
+                    <span className="text-xs text-slate-400 font-light">{item.desc}</span>
+                  </div>
                 </div>
               ))}
             </Marquee>
@@ -110,24 +98,28 @@ export function Skills() {
                     <h3 className="text-xl font-bold text-white tracking-wide">{group.category}</h3>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                    {group.skills.map((skill) => (
-                      <MagicCard
-                        key={skill.name}
-                        className="p-4 flex flex-col items-center justify-center text-center bg-slate-950/80 border-slate-800 hover:border-cyan-500/50 group"
-                      >
-                        <div className="size-12 mb-3 relative flex items-center justify-center p-2 rounded-xl bg-slate-900 border border-slate-800 group-hover:scale-110 group-hover:border-cyan-500/40 transition-all duration-300">
-                          <img
-                            src={skill.icon}
-                            alt={skill.alt}
-                            className="size-full object-contain filter drop-shadow-[0_0_8px_rgba(0,200,255,0.2)]"
-                          />
-                        </div>
-                        <span className="text-xs font-medium text-slate-200 font-mono group-hover:text-cyan-300 transition-colors">
-                          {skill.name}
-                        </span>
-                      </MagicCard>
-                    ))}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    {group.skills.map((skill) => {
+                      const Icon = skill.icon;
+                      return (
+                        <TiltCard
+                          key={skill.name}
+                          className="p-6 flex flex-col justify-between bg-[#040e1a]/80 border-slate-800 hover:border-cyan-500/50 group"
+                        >
+                          <div>
+                            <div className="size-12 mb-4 rounded-xl bg-cyan-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                              <Icon className="size-6" />
+                            </div>
+                            <h4 className="text-base font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                              {skill.name}
+                            </h4>
+                            <p className="text-xs text-slate-400 font-light leading-relaxed">
+                              {skill.desc}
+                            </p>
+                          </div>
+                        </TiltCard>
+                      );
+                    })}
                   </div>
                 </div>
               </BlurFade>

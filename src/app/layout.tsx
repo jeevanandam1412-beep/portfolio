@@ -15,8 +15,14 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jeevanandam M — Cloud & DevOps Engineer Portfolio",
-  description: "Portfolio of Jeevanandam M, aspiring Cloud & DevOps Engineer specializing in AWS, Docker, Kubernetes, Linux, and CI/CD pipelines.",
+  title: "Santhana Krishnan G — Technical Manager & Valuation Expert Portfolio",
+  description: "Portfolio of Santhana Krishnan G, Technical Manager specializing in property valuations, site inspections, vendor management, risk assessment, and banking compliance.",
+  openGraph: {
+    title: "Santhana Krishnan G — Technical Manager Portfolio",
+    description: "Technical Manager specializing in site inspections, vendor management, internal technical audits, property valuation, and banking risk compliance.",
+    siteName: "Santhana Krishnan G Portfolio",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -26,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${outfit.variable} ${jetbrainsMono.variable} dark scroll-smooth`}>
-      <body className="bg-slate-950 text-slate-100 antialiased selection:bg-cyan-500/30 selection:text-white">
+      <body className="bg-[#020914] text-slate-100 antialiased selection:bg-cyan-500/30 selection:text-white">
         {children}
       </body>
     </html>
