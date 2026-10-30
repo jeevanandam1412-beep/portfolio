@@ -8,28 +8,28 @@ import { Mail, Phone, MapPin, FileText, Send, Sparkles, Globe } from "lucide-rea
 
 export function Contact() {
   return (
-    <section id="contact" className="py-20 relative bg-slate-950/60">
+    <section id="contact" className="py-12 sm:py-20 relative bg-slate-950/60">
       <div className="container mx-auto px-4 max-w-5xl">
         <BlurFade delay={0.1}>
-          <div className="flex flex-col items-center text-center mb-16">
+          <div className="flex flex-col items-center text-center mb-10 sm:mb-16">
             <span className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase bg-cyan-950/60 border border-cyan-500/30 px-3.5 py-1 rounded-full mb-3">
               LET&apos;S CONNECT
             </span>
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
               Open to New <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Cloud Opportunities</span>
             </h2>
-            <p className="text-slate-400 text-base max-w-2xl mt-4 font-light">
+            <p className="text-slate-400 text-sm sm:text-base max-w-2xl mt-4 font-light">
               Seeking an entry-level Cloud Computing or DevOps Engineering opportunity to apply AWS, Linux, automation, and infrastructure skills.
             </p>
           </div>
         </BlurFade>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-stretch">
 
           {/* Contact Details Card */}
           <div className="md:col-span-7">
             <BlurFade delay={0.2} className="h-full">
-              <MagicCard className="h-full p-8 flex flex-col justify-between bg-slate-950/90 border-cyan-500/30">
+              <MagicCard className="h-full p-5 sm:p-8 flex flex-col justify-between bg-slate-950/90 border-cyan-500/30">
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
 
@@ -72,9 +72,9 @@ export function Contact() {
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-slate-800 flex items-center gap-4">
+                <div className="pt-6 border-t border-slate-800 flex flex-wrap items-center gap-3">
                   <a
-                    href="https://linkedin.com"
+                    href="https://linkedin.com/in/jeevanandam-m-6532b2276"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cyan-500/40 transition-all text-xs font-mono"
@@ -84,13 +84,23 @@ export function Contact() {
                   </a>
 
                   <a
-                    href="https://github.com"
+                    href="https://github.com/jeevanandam1412-beep"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cyan-500/40 transition-all text-xs font-mono"
                   >
                     <svg className="size-4 fill-cyan-400" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" /></svg>
                     <span>GitHub</span>
+                  </a>
+
+                  <a
+                    href="https://jeevanandam.tech"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cyan-500/40 transition-all text-xs font-mono"
+                  >
+                    <Globe className="size-4 text-cyan-400" />
+                    <span>Portfolio</span>
                   </a>
                 </div>
               </MagicCard>
@@ -108,16 +118,25 @@ export function Contact() {
 
                   <h3 className="text-xl font-bold text-white mb-3">Direct Engagement</h3>
                   <p className="text-slate-300 text-sm leading-relaxed mb-6 font-light">
-                    Interested in discussing Cloud &amp; DevOps roles, AWS infrastructure setup, or reviewing my portfolio code? Send a direct email or message.
+                    Interested in discussing Cloud &amp; DevOps roles, AWS infrastructure setup, or reviewing my qualifications? Reach out directly or grab my resume.
                   </p>
                 </div>
 
-                <div className="space-y-4">
-                  <a href="mailto:jeevanandam0809@gmail.com" className="w-full">
+                <div className="space-y-3">
+                  <a href="mailto:jeevanandam1412@gmail.com" className="w-full block">
                     <ShimmerButton className="w-full justify-center">
                       <Send className="size-4" />
                       <span>Send Direct Email</span>
                     </ShimmerButton>
+                  </a>
+
+                  <a
+                    href="/Jeevanandam_M_Resume.pdf"
+                    download="Jeevanandam_M_Resume.pdf"
+                    className="flex items-center justify-center gap-2 w-full py-3 rounded-full text-xs font-mono font-semibold text-slate-200 hover:text-white bg-slate-900 border border-slate-700 hover:border-cyan-500/50 transition-all"
+                  >
+                    <FileText className="size-4 text-cyan-400" />
+                    <span>Download Official Resume (PDF)</span>
                   </a>
                 </div>
               </MagicCard>
